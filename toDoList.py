@@ -12,9 +12,12 @@ while start:
     elif new_command == 'add':
         new_task = input('Введите название задачи: ').lower()
         TASKS.append(new_task)
+        print('Задача добавлена в список')
         print('Текущий список задач', TASKS)
     elif new_command == 'print':
-        print('Текущий список задач', TASKS)
+        print('Текущий список задач: ')
+        for task in TASKS:
+            print(task)
     elif new_command == 'exit' or new_command != ['add','help', 'print']:
         print('Команда не распознана введите одну из следующих команд:', HELP)
         print('Спасибо за использование! До свидания!')
