@@ -1,8 +1,7 @@
 import telebot
-token = 'AAFaQKKp7pXRlYmRZcuXVCgtjWXYRlY8Hs8'
+token = '1448944959:AAFaQKKp7pXRlYmRZcuXVCgtjWXYRlY8Hs8'
 
-bot = telebot.Telebot(token)
-
+bot = telebot.TeleBot(token)
 
 @bot.message_handler(content_types=["text"])
 def echo(message):
