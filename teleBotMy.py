@@ -12,7 +12,7 @@ HELP = '''
 * /help - Напечатать help
 * /random - Добавить на сегодня случайную задачу
 '''
-
+COMMANDS_BOT = ['add', 'print','help', 'random']
 RANDOM_TASKS = [
     'Изучить питон',
     'Выполнить ТО',
@@ -60,5 +60,13 @@ def add_task(message):
     task = split_task[2]
     add_todo(date,task)
     bot.send_message(message.chat.id, f'Задача {task} записанна в {date}')
+
+@bot.message_handler( content_types = ["text"])
+def unknow_command(message):
+    split_task = message.text.split()
+    task = split_task[0].lower()
+    if task not in COMMANDS_BOT:
+        bot.send_message(message.chat.id, f'Неизвестная команда {task}. Наберите /help и посмотрите команды')
+
 
 bot.polling(none_stop=True)
