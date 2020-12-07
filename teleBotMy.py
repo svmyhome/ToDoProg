@@ -44,14 +44,24 @@ def print_task(message):
     if len(split_task) == 1:
         bot.send_message(message.chat.id, f'Вы ввели неправильный формат команды print.\n Формат /print Дата')
     else:
-        date = split_task[1]
-        text = ''
-        if date in todos:
-            for task in todos[date]:
-                text = text + f'[] {task}\n'
+        if split_task[1] == 'all':
+            for date in todos:
+                text = ''
+                if date in todos:
+                    for task in todos[date]:
+                        text = text + f'[] {task}\n'
+                else:
+                    text = 'Такой даты нет'
+                bot.send_message(message.chat.id, f'На {date} у вас следующие задачи:\n {text}')
         else:
-            text = 'Такой даты нет'
-        bot.send_message(message.chat.id, text)
+            for date in split_task[1:]:
+                text = ''
+                if date in todos:
+                    for task in todos[date]:
+                        text = text + f'[] {task}\n'
+                else:
+                    text = 'Такой даты нет'
+                bot.send_message(message.chat.id, f'На {date} у вас следующие задачи:\n {text}')
 
 @bot.message_handler(commands=["add"])
 def add_task(message):
@@ -70,6 +80,5 @@ def unknow_command(message):
     task = split_task[0].lower()
     if task not in COMMANDS_BOT:
         bot.send_message(message.chat.id, f'Неизвестная команда {task}. Наберите /help и посмотрите команды')
-
 
 bot.polling(none_stop=True)
