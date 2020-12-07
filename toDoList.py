@@ -14,9 +14,11 @@ start = True
 def add_todo(date_task, new_task):
     if date_task in todos:
         todos[date_task].append(new_task)
+        todos[date_task].append('test')
         print(f'Задача {new_task} добавлена в дату {date_task}')
     elif date_task not in todos:
         todos[date_task] = [new_task]
+        todos[date_task].append('test')
         print(f'Задача {new_task} добавлена в дату {date_task}')
 while start:
     new_command = input('Введите команду: ').lower()

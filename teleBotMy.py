@@ -58,8 +58,11 @@ def add_task(message):
     split_task = message.text.split(maxsplit = 2)
     date = split_task[1].lower()
     task = split_task[2]
-    add_todo(date,task)
-    bot.send_message(message.chat.id, f'Задача {task} записанна в {date}')
+    if len(task) < 3:
+        bot.send_message(message.chat.id, f'Вы ввели задачц {task} менее 4-х символов. ввведите задачу не менее 4-х символов')
+    else:
+        add_todo(date, task)
+        bot.send_message(message.chat.id, f'Задача {task} записанна в {date}')
 
 @bot.message_handler( content_types = ["text"])
 def unknow_command(message):
